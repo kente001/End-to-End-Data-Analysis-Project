@@ -3,7 +3,7 @@
 
 Welcome to the **End-to-End Data Analytics Project**! This project demonstrates a complete data analytics workflow from **data extraction and cleaning** to **exploratory data analysis (EDA)** and the creation of an **interactive dashboard** using **Looker Studio**.
 
-## ✅ **Project Requirements & Objective**
+## **Project Requirements & Objective**
 
 ### **Objective**
 
