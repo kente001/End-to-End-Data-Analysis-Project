@@ -1,55 +1,47 @@
+<p align="center"><img src="./assets/banner.svg" alt="End-to-End Data Analysis: extraction, cleaning, EDA and a live dashboard" width="100%"></p>
 
-# **End-to-End Data Analytics Project**
+A complete analysis workflow on sales data: pull it from **PostgreSQL**, clean it in **Python**, and present it in an interactive **Looker Studio** dashboard.
 
-Welcome to the **End-to-End Data Analytics Project**! This project demonstrates a complete data analytics workflow from **data extraction and cleaning** to **exploratory data analysis (EDA)** and the creation of an **interactive dashboard** using **Looker Studio**.
+**[View the dashboard](https://lookerstudio.google.com/reporting/1eb52f32-8a56-465d-8048-4377e6392989)**
 
-## **Project Requirements & Objective**
+## The workflow
 
-### **Objective**
+```mermaid
+flowchart LR
+    A[(PostgreSQL<br/>sales, products,<br/>salespersons, customers)] --> B[Clean]
+    B --> C[Anonymise]
+    C --> D[Merge + derive fields]
+    D --> E[cleaned_sales_data.csv]
+    E --> F[Looker Studio dashboard]
+```
 
-The main objective of this project is to:
+`script/e2e_data_pipeline.py` does it in seven steps:
 
-* Extract and prepare raw data for analysis
-* Perform data cleaning to address inconsistencies and missing values
-* Conduct Exploratory Data Analysis (EDA) to identify trends and insights
-* Create an interactive **Looker Studio dashboard** to visualize key business metrics and provide actionable insights
+1. **Connect** to the PostgreSQL database.
+2. **Load** the sales, product, salesperson and customer tables.
+3. **Clean** the sales data: remove rows with invalid amounts or quantities, fix records where the unit price is below the unit cost, and estimate missing or zero costs.
+4. **Anonymise** sensitive data: product names and categories, salesperson names and customer names are replaced using Faker.
+5. **Merge** the tables into one and drop the keys that are no longer needed.
+6. **Add derived fields** for analysis.
+7. **Save** the result as `cleaned_sales_data.csv`, the dashboard's data source.
 
-## 📋 **Specifications**
+## Run it
 
-### **Data Source**
+```bash
+pip install pandas sqlalchemy faker psycopg2-binary
+python script/e2e_data_pipeline.py
+```
 
-The dataset used in this project is sourced from a PostgreSQL database.
+Set the database connection details at the top of the script to your own before running.
 
-### **Data Quality**
+## Layout
 
-The raw dataset contains common issues such as:
-
-* Missing values
-* Duplicate records
-* Inconsistent formatting
-
-I address these issues through a structured **data cleaning process** to ensure accurate and reliable analysis.
-
-### **Documentation**
-
-Each step of the process from data extraction to dashboard creation is clearly documented. Reports and code comments are provided for transparency and reproducibility.
-
----
-
-## 📊 **Dashboard**
-
-### **Objective**
-
-The final deliverable is a **Looker Studio dashboard** that:
-
-* Visualizes the key metrics and KPIs
-* Provides actionable insights for business decision-making
-* Is dynamic, interactive, and user-friendly
+| Folder | Contents |
+|---|---|
+| `script/` | The pipeline script |
+| `dashboard/` | Link to the Looker Studio dashboard |
+| `datasets/`, `docs/` | Reserved for data and documentation |
 
 ---
 
-## 📜 **License**
-
-This project is intended for **educational purposes only** and should **not be used for commercial purposes or resold**.
-
-
+<sub>Part of <b>the silent data</b> · Kennedy Njoroge</sub>
