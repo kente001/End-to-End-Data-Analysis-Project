@@ -21,11 +21,6 @@ from faker import Faker
 # ---------------------------
 # 1. Database Connection
 # ---------------------------
-db_user = 'username'
-db_password = 'password'
-db_host = 'localhost'
-db_port = '5432'
-db_name = 'your_database'
 
 engine = create_engine(f'postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}')
 
